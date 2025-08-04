@@ -3,10 +3,9 @@ const posts = require('../data/posts.js')
 const index = (req, res) => {
   const tags = req.query.tags
   let filteredPost = posts
-  console.log(tags)
   if (tags) {
     filteredPost = posts.filter(item => {
-      return item.tags.find(tag => tag.toLowerCase().includes(tags)) !== undefined
+      return item.tags.map(t => t.toLowerCase()).includes(tags.toLowerCase())
     });
   }
   res.json(filteredPost)
