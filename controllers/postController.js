@@ -15,6 +15,9 @@ const index = (req, res) => {
 const show = (req, res) => {
   const postId = parseInt(req.params.id);
   const post = posts.find(elem => elem.id === postId);
+  if (!post) {
+    return res.status(404).json({ error: "Not Found", message: "Post non trovato" })
+  }
   res.json(post)
 
 }
@@ -30,6 +33,9 @@ const modify = (req, res) => {
 const destroy = (req, res) => {
   const postId = parseInt(req.params.id);
   const post = posts.find(elem => elem.id === postId);
+  if (!post) {
+    return res.status(404).json({ error: "Not Found", message: "Post non trovato" })
+  }
   posts.splice(posts.indexOf(post), 1)
   console.log(posts)
   res.sendStatus(204)
