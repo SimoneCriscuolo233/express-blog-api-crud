@@ -20,7 +20,7 @@ const show = (req, res) => {
   res.json(post)
 
 }
-const store = (req, res) => { 
+const store = (req, res) => {
   const newID = posts[posts.length - 1].id + 1;
   const { title, content, image, tags } = req.body
   const newPost = {
@@ -29,17 +29,30 @@ const store = (req, res) => {
     content,
     image,
     tags
-  } 
+  }
   posts.push(newPost)
 
   res.status(201).json(newPost)
 
 }
 const update = (req, res) => {
-  res.send(`Modifica totale del post con id ${req.params.id}`)
+  const postId = parseInt(req.params.id);
+  const post = posts.find(elem => elem.id === postId);
+  const { title, content, image, tags } = req.body
+  post.title = title
+  post.content = content
+  post.image = image
+  post.tags = tags
+  res.send(post)
+
 }
 const modify = (req, res) => {
-  res.send(`Modifica parziale del post con id ${req.params.id}`)
+
+  const postId = parseInt(req.params.id);
+  const post = posts.find(elem => elem.id === postId);
+
+  post.title = req.body.title
+  res.send(post)
 }
 const destroy = (req, res) => {
   const postId = parseInt(req.params.id);
