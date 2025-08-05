@@ -39,6 +39,10 @@ const update = (req, res) => {
   const postId = parseInt(req.params.id);
   const post = posts.find(elem => elem.id === postId);
   const { title, content, image, tags } = req.body
+  if (!post) {
+    return res.status(404).json({ error: "Not Found", message: "Post non trovato" })
+  }
+
   post.title = title
   post.content = content
   post.image = image
@@ -50,6 +54,9 @@ const modify = (req, res) => {
 
   const postId = parseInt(req.params.id);
   const post = posts.find(elem => elem.id === postId);
+  if (!post) {
+    return res.status(404).json({ error: "Not Found", message: "Post non trovato" })
+  }
 
   post.title = req.body.title
   res.send(post)
