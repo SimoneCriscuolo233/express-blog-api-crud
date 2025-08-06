@@ -4,6 +4,9 @@ const port = 3000
 
 const posts = require('./data/posts.js')
 const postsRouter = require('./routers/posts.js')
+const errorsHandler = require('./middleware/errorsHandler.js')
+const notFound = require('./middleware/notFound.js')
+
 app.use(express.static('public'))
 app.use(express.json())
 
@@ -14,9 +17,10 @@ app.get('/', (req, res) => {
 })
 app.get('/bacheca', (req, res) => {
   res.json(posts)
-}
+})
 
-)
+app.use(errorsHandler)
+app.use(notFound)
 app.listen(port, () => {
   console.log(`App listening on port ${port}`)
 })
