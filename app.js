@@ -4,8 +4,8 @@ const port = 3000
 
 const posts = require('./data/posts.js')
 const postsRouter = require('./routers/posts.js')
-const errorsHandler = require('./middleware/errorsHandler.js')
-const notFound = require('./middleware/notFound.js')
+const errorsHandler = require('./middlewares/errorsHandler.js')
+const notFound = require('./middlewares/notFound.js')
 
 app.use(express.static('public'))
 app.use(express.json())
